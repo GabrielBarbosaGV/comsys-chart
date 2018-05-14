@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Line as LineChart } from 'react-chartjs-2';
 
 class Graph extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return this.drawGraph();
     }
@@ -18,7 +14,8 @@ class Graph extends Component {
                     return {
                         label: estimatorData.estimatorName,
                         data: estimatorData[this.props.datatype],
-                        backgroundColor: this.getBorderColor(estimatorData.estimatorName)
+                        backgroundColor: this.getBackgroundColor(estimatorData.estimatorName),
+                        borderColor: this.getBorderColor(estimatorData.estimatorName)
                     }
                 })
             }
@@ -43,12 +40,25 @@ class Graph extends Component {
         } else return null;
     }
 
-    getBorderColor(estimatorName) {
+    getBackgroundColor(estimatorName) {
         switch(estimatorName) {
             case 'Eom-Lee':
             return 'rgba(64, 64, 128, 0.5)';
             case 'Lower Bound':
             return 'rgba(64, 128, 64, 0.5)';
+            default:
+            break;
+        }
+    }
+
+    getBorderColor(estimatorName) {
+        switch (estimatorName) {
+            case 'Eom-Lee':
+            return 'rgba(64, 64, 128, 1)';
+            case 'Lower Bound':
+            return 'rgba(64, 128, 64, 1)';
+            default:
+            break;
         }
     }
 
@@ -64,6 +74,8 @@ class Graph extends Component {
             return 'Total Empty Slots';
             case 'ellapsedTime':
             return 'Identification Time (Nanoseconds)';
+            default:
+            break;
         }
     }
 
@@ -75,6 +87,8 @@ class Graph extends Component {
             return 1100;
             case 'collisionCount':
             return 1800;
+            default:
+            break;
         }
     }
 }
